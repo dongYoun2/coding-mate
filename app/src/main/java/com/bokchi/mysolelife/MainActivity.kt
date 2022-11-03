@@ -21,6 +21,9 @@ class MainActivity : AppCompatActivity() {
         val joinBtnClicked = findViewById<Button>(R.id.joinBtn)
         joinBtnClicked.setOnClickListener {
 
+            val email = findViewById<EditText>(R.id.emailArea)
+            val pwd = findViewById<EditText>(R.id.pwdArea)
+
             auth.createUserWithEmailAndPassword("test@test.com", "4123")
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
