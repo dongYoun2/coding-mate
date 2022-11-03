@@ -21,19 +21,12 @@ class MainActivity : AppCompatActivity() {
         val joinBtnClicked = findViewById<Button>(R.id.joinBtn)
         joinBtnClicked.setOnClickListener {
 
-            auth.createUserWithEmailAndPassword(email, password)
+            auth.createUserWithEmailAndPassword("test@test.com", "4123")
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
-                        updateUI(user)
+                        Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
                     } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                        Toast.makeText(baseContext, "Authentication failed.",
-                                Toast.LENGTH_SHORT).show()
-                        updateUI(null)
+                        Toast.makeText(this, "no", Toast.LENGTH_SHORT).show()
                     }
         }
 
