@@ -12,6 +12,15 @@ class BoardListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_board_write)
+
+        val writeBtn:Button = findViewById(R.id.writeUploadBtn)
+        writeBtn.setOnClickListener {
+            val database = Firebase.database
+            val myRef = database.getReference("message")
+
+            myRef.setValue("Hello, World!")
+        }
      
     }
 }
