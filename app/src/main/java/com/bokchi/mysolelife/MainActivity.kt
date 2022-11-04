@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                         // Sign in success, update UI with the signed-in user's information
                         Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
                         Toast.makeText(this, auth.currentUser?.uid.toString(), Toast.LENGTH_SHORT).show()
+
+                        val intent = Intent(this, MainActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
                     } else {
                         // If sign in fails, display a message to the user.
                         Toast.makeText(this, "no", Toast.LENGTH_SHORT).show()
