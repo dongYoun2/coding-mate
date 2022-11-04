@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Toast.makeText(this, auth.currentUser?.uid.toString(), Toast.LENGTH_SHORT).show()
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         val joinBtnClicked = findViewById<Button>(R.id.joinBtn)
@@ -32,15 +34,44 @@ class MainActivity : AppCompatActivity() {
             val email =binding.emailArea
             val pwd = binding.pwdArea
 
-            auth.createUserWithEmailAndPassword("test@test.com", "4123")
+            auth.createUserWithEmailAndPassword(
+                email.text.toString(),
+                pwd.text.toString()
+            )
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(this, "no", Toast.LENGTH_SHORT).show()
                     }
+            }
         }
 
+        binding.logoutBtn.setOnClickListener {
+            
+            auth.signOut()
+            Toast.makeText(this, auth.currentUser?.uid.toString(), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.loginBtn.setOnClickListener {
+            
+            val email =binding.emailArea
+            val pwd = binding.pwdArea
+            
+            auth.signInWithEmailAndPassword(
+                email.text.toString(),
+                pwd.text.toString()
+            )
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, auth.currentUser?.uid.toString(), Toast.LENGTH_SHORT).show()
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        Toast.makeText(this, "no", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
     }
 }
