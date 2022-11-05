@@ -8,6 +8,12 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+        <ListView
+            android:id="@+id/commentLV"
+            android:layout_width="match_parent"
+            android:layout_height="600dp"
+        />
+
         <Button
             android:id="@+id/writeBtn"
             android:text="글쓰기"
@@ -16,6 +22,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+        />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
