@@ -16,6 +16,8 @@ class BoardListActivity : AppCompatActivity() {
 
     lateint var LVAdapter: ListViewAdapter
 
+    val list = MutableListOf<Model>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,11 +28,7 @@ class BoardListActivity : AppCompatActivity() {
             val intent = Intent(this, BoardWriteActivity::class.java)
             startActivity(Intent)
         }
-
-        val list = MutableListOf<Model>()
-        list.add(Model("a"))
-        list.add(Model("b"))
-        list.add(Model("c"))
+        
 
         LVAdapter = ListViewAdapter()
 
@@ -56,7 +54,9 @@ class BoardListActivity : AppCompatActivity() {
                 for (dataModel in dataSnapshot.children) {
                     val item = dataModel.getValue(Model::class.java)
                     Log.d("BoardListActivity", item.toString())
+                    list.add(item!!)
                 }
+                LVAdapter.notifyDataSetChanged()
             }
 
             @Override
