@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
 
         binding.tipTap.setOnClickListener {
             Log.d("HomeFragment", "tipTap")
-            Toast.makeText(requireContext(), "clicked", Toast.LENGTH_LONG).show()
+            it.findNavController().navigate(R.id.action_homeFragment_to_tipFragment)
         }
 
         return binding.root
