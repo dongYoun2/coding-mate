@@ -1,20 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.HomeFragment">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.BookmarkFragment">
 
-        <!-- TODO: Update blank fragment layout -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout4">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    />
+
+                <LinearLayout
+                    android:background="@color/mainColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@color/white"
@@ -57,6 +91,9 @@
                     android:src="@drawable/bottom_store" />
 
             </LinearLayout>
+
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
