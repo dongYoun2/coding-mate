@@ -7,14 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.bokchi.mysolelife.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-/**
- * A simple [Fragment] subclass.
- * Use the [StoreFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class StoreFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +23,5 @@ class StoreFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_store, container, false)
     }
-
 
 }
