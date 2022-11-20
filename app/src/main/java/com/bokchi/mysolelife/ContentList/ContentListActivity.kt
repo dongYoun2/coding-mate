@@ -22,45 +22,66 @@ class ContentListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-         super.onCreate(savedInstanceState)
-         setContentView(R.layout.activity_content_list)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_content_list)
 
-         val items = ArrayList<ContentModel>()
-         val rvAdapter = ContentRVAdapter(baseContext, items)
+        val items = ArrayList<ContentModel>()
+        val rvAdapter = ContentRVAdapter(baseContext, items)
 
-         // Write a message to the database
-         val database = Firebase.database
-         val myRef = database.getReference("contents")
+        // Write a message to the database
+        val database = Firebase.database
 
-         myRef.push().setValue(
-            ContentModel("title1", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FblYPPY%2Fbtq66v0S4wu%2FRmuhpkXUO4FOcrlOmVG4G1%2Fimg.png", "https://philosopher-chan.tistory.com/1235?category=941578")
-         )
-         myRef.push().setValue(
-            ContentModel("title2", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FznKK4%2Fbtq665AUWem%2FRUawPn5Wwb4cQ8BetEwN40%2Fimg.png", "https://philosopher-chan.tistory.com/1235?category=941578")
-         )
-         myRef.push().setValue(
-            ContentModel("title3", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbtig9C%2Fbtq65UGxyWI%2FPRBIGUKJ4rjMkI7KTGrxtK%2Fimg.png", "https://philosopher-chan.tistory.com/1235?category=941578")
-         )
-         myRef.push().setValue(
-            ContentModel("title2", "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FznKK4%2Fbtq665AUWem%2FRUawPn5Wwb4cQ8BetEwN40%2Fimg.png", "https://philosopher-chan.tistory.com/1235?category=941578")
-         )
+        val category = intent.getStringExtra("category")
 
-         val rv : RecyclerView = findViewById(R.id.rv)
 
-         rv.adapter = rvAdapter
+        if(category == "category1") {
 
-         rv.layoutManager = GridLayoutManager(this, 2)
+            myRef = database.getReference("contents")
 
-         rvAdapter.itemClick = object : ContentRVAdapter.ItemClick {
-               override fun onClick(view: View, position: Int) {
+        } else if(category == "category2") {
 
-                  Toast.makeText(baseContext, items[position].title, Toast.LENGTH_LONG).show()
+            myRef = database.getReference("contents2")
+            
+        }
 
-                  val intent = Intent(this@ContentListActivity, ContentShowActivity::class.java)
-                  intent.putExtra("url", items[position].webUrl)
-                  startActivity(intent)
-               }
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-         }
+                for (dataModel in dataSnapshot.children) {
+                    Log.d("ContentListActivity", dataModel.toString())
+                    val item = dataModel.getValue(ContentModel::class.java)
+                    items.add(item!!)
+
+                }
+                rvAdapter.notifyDataSetChanged()
+                Log.d("ContentListActivity", items.toString())
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w("ContentListActivity", "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        myRef.addValueEventListener(postListener)
+
+        val rv : RecyclerView = findViewById(R.id.rv)
+
+        rv.adapter = rvAdapter
+
+        rv.layoutManager = GridLayoutManager(this, 2)
+
+        rvAdapter.itemClick = object : ContentRVAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+
+                Toast.makeText(baseContext, items[position].title, Toast.LENGTH_LONG).show()
+
+                val intent = Intent(this@ContentListActivity, ContentShowActivity::class.java)
+                intent.putExtra("url", items[position].webUrl)
+                startActivity(intent)
+
+            }
+
+        }
     }
 }

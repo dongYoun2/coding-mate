@@ -9,8 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.contentsList.ContentListActivity
 import com.bokchi.mysolelife.databinding.FragmentTipBinding
-
 
 class TipFragment : Fragment() {
 
@@ -33,6 +33,13 @@ class TipFragment : Fragment() {
 
             val intent = Intent(context, ContentListActivity::class.java)
             intent.putExtra("category", "category1")
+            startActivity(intent)
+
+        }
+
+        binding.category2.setOnClickListener {
+            val intent = Intent(context, ContentListActivity::class.java)
+            intent.putExtra("category", "category2")
             startActivity(intent)
 
         }
