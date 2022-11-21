@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bokchi.mysolelife.R
+import com.bokchi.mysolelife.utils.FBAuth
+import com.bokchi.mysolelife.utils.FBRef
 import com.bumptech.glide.Glide
 
 class ContentRVAdapter(val context : Context, val items : ArrayList<ContentModel>, val keyList: ArrayList<String>) 
@@ -44,6 +47,11 @@ class ContentRVAdapter(val context : Context, val items : ArrayList<ContentModel
             bookmarkArea.setOnClickListener {
                 Log.d("ContentRVAdapter", FBAuth.getUid())
                 Toast.makeText(context, key, Toast.LENGTH_LONG).show()
+
+                FBRef.bookmarkRef
+                    .child(FBAuth.getUid())
+                    .child(key)
+                    .setValue("Good")
             }
 
             contentTitle.text = item.title
