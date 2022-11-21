@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bokchi.mysolelife.R
 import com.bumptech.glide.Glide
 
-class ContentRVAdapter(val context : Context, val items : ArrayList<ContentModel>) : RecyclerView.Adapter<ContentRVAdapter.Viewholder>() {
+class ContentRVAdapter(val context : Context, val items : ArrayList<ContentModel>, val keyList: ArrayList<String>) 
+    : RecyclerView.Adapter<ContentRVAdapter.Viewholder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContentRVAdapter.Viewholder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.content_rv_item, parent, false)
