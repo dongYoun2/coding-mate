@@ -19,6 +19,7 @@ class ContentRVAdapter(val context : Context, val items : ArrayList<ContentModel
     }
 
     override fun onBindViewHolder(holder: ContentRVAdapter.Viewholder, position: Int) {
+        holder.bindItems(items[position], keyList[position])
     }
 
     override fun getItemCount(): Int {
